@@ -11,21 +11,34 @@ Une application de gestion de tâches (To-do list) réalisée avec React et Vite
 
 ## Technologies utilisées
 
-- [React](https://react.dev/) 19
+- [React](https://react.dev/)
 - [Vite](https://vitejs.dev/)
-- CSS
 
-## Installation
+## 1. Installation et configuration du projet
 
-1. Clonez le dépôt ou téléchargez les fichiers du projet.
-2. Installez les dépendances :
-	```powershell
-	npm install
-	```
-3. Lancez le serveur de développement :
-	```powershell
-	npm run dev
-	```
+La première étape a été d’installer **Node.js**, version **v22.18.0**, qui fournit l’environnement d’exécution JavaScript côté serveur et le gestionnaire de paquets **npm**.
+
+### Étapes :
+
+1. Téléchargement et installation de Node.js
+   - Rendez-vous sur [https://nodejs.org](https://nodejs.org).  
+   - Télécharger la version 22.18.0 (LTS).  
+   - Lancer l’installeur et suivre les instructions.
+
+2. Vérification de l’installation  
+   Dans un terminal :  
+   ```bash
+   node -v
+   ```
+3. Clonez le dépôt ou téléchargez les fichiers du projet.
+4. Installez les dépendances :
+   ```bash
+   npm install
+   ```
+5. Lancez le serveur de développement :
+   ```bash
+   npm run dev
+   ```
 
 ## Structure du projet
 
@@ -44,4 +57,4 @@ Une application de gestion de tâches (To-do list) réalisée avec React et Vite
 
 ## Auteur
 
-Corentin Polard
+[CorentinPolard](https://github.com/CorentinPolard)
