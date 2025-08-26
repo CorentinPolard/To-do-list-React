@@ -1,66 +1,39 @@
 import { useState } from 'react';
+import addTask from './AddTask';
+import SingleTask from './SingleTask';
 
 export default function TaskList() {
     // Liste de tâches initiale
-    const [tasks, setTasks] = useState([
-        { id: 1, label: 'Faire les courses', completed: true },
-        { id: 2, label: 'Aller à la salle de sport', completed: false },
-        { id: 3, label: 'Préparer le repas', completed: true },
-        { id: 4, label: 'Lire un livre', completed: false }
-    ]);
+    if (localStorage.getItem('tasks') === null) {
+        localStorage.setItem('tasks', JSON.stringify([]));
+    }
+    const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem('tasks')));
 
     // ID pour la prochaine tâche
-    const [taskId, setId] = useState(tasks.length + 1);
+    const [taskId, setTaskId] = useState(tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1);
 
     // Nouvelle tâche
     const [task, setTask] = useState({ id: taskId, label: "", completed: false });
 
-    const addTask = (e) => {
-        e.preventDefault();
-        // Éviter d'ajouter une tâche vide
-        if (task.label.trim() === '') {
-            return;
-        }
-        // Ajouter la nouvelle tâche à la liste
-        setTasks([...tasks, task]);
-        // Incrémenter l'id pour la prochaine tâche
-        setId(taskId + 1);
-        // Réinitialiser le champ de saisie
-        setTask({ id: taskId, label: "", completed: false });
-    }
-
     function toggleCompleted(id) {
         // Modifie la liste de tâches
         // Pour chaques tâches, laisse telle quelle si l'id ne correspond pas, modifie le status si l'id correspond
-        setTasks(
-            tasks.map(task => task.id === id ? { ...task, completed: !task.completed } : task)
-        );
-    }
-
-    function removeTask(id) {
-        // Modifie la liste de tâches 
-        // Ajoute toutes les tâches dans tasks qui ont un id différent de celui à supprimer
-        setTasks([...tasks].filter(task => task.id !== id));
+        const updatedTasks = tasks.map(task => task.id === id ? { ...task, completed: !task.completed } : task);
+        setTasks(updatedTasks);
+        localStorage.setItem('tasks', JSON.stringify(updatedTasks));
     }
 
     return (
         <section>
             <h2>Liste des tâches</h2>
-            <form className="add-task" onSubmit={addTask}>
+            <form className="add-task" onSubmit={(e) => addTask(e, tasks, setTasks, task, setTask, taskId, setTaskId)}>
                 <input type="text" placeholder="Nouvelle tâche" value={task.label} onChange={(e) => setTask({ id: taskId, label: e.target.value, completed: false })} />
                 <button type="submit">Ajouter</button>
             </form>
             <ul className="task-list">
                 {tasks.map((element) => {
                     return (
-                        <li className="list-element-container" key={element.id} >
-                            {/* Si la task à pour valeur true à l'attribut completed, alors la checkbox est déjç cochée. */}
-                            <div className="list-element">
-                                <input type="checkbox" checked={element.completed} onChange={() => toggleCompleted(element.id)} />
-                                <p className={element.completed ? "completed" : ""}>{element.label}</p>
-                            </div>
-                            <p className="remove-task" onClick={() => removeTask(element.id)}>✖</p>
-                        </li>
+                        <SingleTask key={element.id} element={element} tasks={tasks} setTasks={setTasks} toggleCompleted={toggleCompleted} />
                     );
                 })}
             </ul>
