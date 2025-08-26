@@ -29,6 +29,7 @@ La première étape a été d’installer **Node.js**, version **v22.18.0**, qui
    Dans un terminal :  
    ```bash
    node -v
+   npm -v
    ```
 3. Clonez le dépôt ou téléchargez les fichiers du projet.
 4. Installez les dépendances :
