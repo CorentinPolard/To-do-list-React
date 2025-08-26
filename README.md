@@ -14,7 +14,7 @@ Une application de gestion de tâches (To-do list) réalisée avec React et Vite
 - [React](https://react.dev/)
 - [Vite](https://vitejs.dev/)
 
-## 1. Installation et configuration du projet
+## Installation et configuration du projet
 
 La première étape a été d’installer **Node.js**, version **v22.18.0**, qui fournit l’environnement d’exécution JavaScript côté serveur et le gestionnaire de paquets **npm**.
 
